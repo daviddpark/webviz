@@ -99,10 +99,11 @@
     (.on force "tick" (on-tick-handler links nodes))))
 
 (defn ^:export force-layout []
-  (.json js/d3 "force/data.json"
-         (fn [data]
-           (render-graph
-            (.category20c (aget js/d3 "scale"))
-            (create-force width height)
-            (create-svg width height)
-            data))))
+  (let [width 650, height 500]
+    (.json js/d3 "force/data.json"
+           (fn [data]
+             (render-graph
+              (.category20c (aget js/d3 "scale"))
+              (create-force width height)
+              (create-svg width height)
+              data)))))
