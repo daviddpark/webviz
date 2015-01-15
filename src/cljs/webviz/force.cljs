@@ -101,6 +101,7 @@
 (defn ^:export force-layout []
   (let [width 650, height 500]
     (.json js/d3 "force/data.json"
+           ; refactored from partial, since data was always nil
            (fn [data]
              (render-graph
               (.category20c (aget js/d3 "scale"))
