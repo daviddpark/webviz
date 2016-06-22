@@ -26,6 +26,7 @@
                    (include-js "/js/webviz.js")
                    (javascript-tag "goog.require('webviz.barchart');")
                    (javascript-tag "goog.require('webviz.force');")
+                   (javascript-tag "goog.require('webviz.int_force');")
                    (javascript-tag "goog.require('webviz.histogram');")
                    (javascript-tag "goog.require('webviz.scatter');")
                    (javascript-tag "goog.require('webviz.core');")
@@ -65,13 +66,27 @@
      [:li [:a {:href "/histogram"}
            "Abalone Lengths Histogram"]]
      [:li [:a {:href "/force"}
-               "2010 Census Racial Clusters"]]]
+           "2010 Census Racial Clusters"]]
+     [:li [:a {:href "/int-force"}
+               "2010 Interactive Census Racial Clusters"]]]
     (include-js "js/goog/base.js")
     (include-js "js/webviz.js")
     (javascript-tag "goog.require('webviz.core');")]))
 
+(defn interactive-force-plot []
+  (d3-page "Interactive Force-Directive Layout"
+           (str "webviz"
+                ".int_force"
+                ".interactive_force_layout();")
+           [:div
+            [:div#force.chart  [:svg]]
+            [:div#datapane]]))
+
 (defroutes site-routes
   (GET "/" [] (index-page))
+  (GET "/int-force" [] (interactive-force-plot))
+  (GET "/int-force/data.json" []
+       (redirect "/data/clusters.json"))
   (GET "/force" [] (force-layout-plot))
   (GET "/force/data.json" []
        (redirect "/data/clusters.json"))

@@ -21,3 +21,6 @@ body {
     stroke: #999;
     stroke-opacity: 1;
 }
+
+#datapane { float: right; width: 250px; }
+#datapane dt { font-weight: bold; }
